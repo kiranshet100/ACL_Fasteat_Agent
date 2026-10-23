@@ -3,10 +3,6 @@ import mimetypes
 from pathlib import Path
 from tkinter import TclError, Tk, filedialog
 from langchain.messages import HumanMessage
-from langchain.agents import create_agent
-from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
-load_dotenv()
 
 def choose_image_file() -> Path:
     """Open a local file picker when no image path is passed on the command line."""
@@ -49,7 +45,7 @@ def image_to_data_url(image_path: Path) -> str:
 def build_image_message(image_path: Path,prompt) -> HumanMessage:
     return HumanMessage(
         content=[
-            {"type": "text", "text": "prompt"},
+            {"type": "text", "text": prompt},
             {"type": "image_url", "image_url": {"url": image_to_data_url(image_path)}},
         ]
     )
